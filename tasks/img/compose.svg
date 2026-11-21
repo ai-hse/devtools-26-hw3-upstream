@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="190" viewBox="0 0 780 190" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8c959f"/>
+    </marker>
+  </defs>
+
+  <!-- Compose-проект -->
+  <rect x="338" y="22" width="432" height="150" rx="10" fill="none" stroke="#8c959f" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="354" y="44" font-size="13" fill="#8c959f">Compose-проект</text>
+
+  <!-- Блоки -->
+  <g font-size="14" fill="#1f2328" text-anchor="middle">
+    <rect x="10" y="72" width="130" height="60" rx="8" fill="#f6f8fa" stroke="#8c959f"/>
+    <text x="75" y="99" font-weight="600">Браузер</text>
+    <text x="75" y="118" font-size="12">или curl</text>
+
+    <rect x="168" y="72" width="150" height="60" rx="8" fill="#f6f8fa" stroke="#8c959f"/>
+    <text x="243" y="99" font-weight="600">Порт хоста</text>
+    <text x="243" y="118" font-size="11" font-family="ui-monospace, Menlo, monospace">127.0.0.1:WEB_PORT</text>
+
+    <rect x="354" y="72" width="120" height="60" rx="8" fill="#ddf4ff" stroke="#54aeff"/>
+    <text x="414" y="99" font-weight="600">gateway</text>
+    <text x="414" y="118" font-size="12">Nginx, порт 80</text>
+
+    <rect x="502" y="72" width="120" height="60" rx="8" fill="#ddf4ff" stroke="#54aeff"/>
+    <text x="562" y="99" font-weight="600">api</text>
+    <text x="562" y="118" font-size="12">порт 8080</text>
+
+    <rect x="650" y="72" width="108" height="60" rx="8" fill="#fff8c5" stroke="#d4a72c"/>
+    <text x="704" y="99" font-weight="600">том reports</text>
+    <text x="704" y="118" font-size="12" font-family="ui-monospace, Menlo, monospace">/data</text>
+  </g>
+
+  <!-- Стрелки -->
+  <g stroke="#8c959f" stroke-width="1.6" marker-end="url(#a)">
+    <line x1="140" y1="102" x2="166" y2="102"/>
+    <line x1="318" y1="102" x2="352" y2="102"/>
+    <line x1="474" y1="102" x2="500" y2="102"/>
+    <line x1="622" y1="102" x2="648" y2="102"/>
+  </g>
+</svg>

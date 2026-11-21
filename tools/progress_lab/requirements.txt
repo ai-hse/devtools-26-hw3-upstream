@@ -1,0 +1,4 @@
+grpcio==1.85.3
+protobuf==7.36.2
+typing-extensions==4.16.0
+websockets==17.3
