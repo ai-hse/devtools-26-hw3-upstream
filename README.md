@@ -30,7 +30,7 @@
 git remote add upstream https://github.com/ai-hse/devtools-26-hw3-upstream.git
 ```
 
-Перед работой и после объявления об обновлении сохраните свои изменения в коммит и выполните в ветке `solution`:
+Перед работой и после объявления об обновлении выполните команду в ветке `solution`. Если у вас есть незакоммиченные изменения, сначала сохраните их в коммит:
 
 ```bash
 git pull --no-rebase --no-edit upstream main
