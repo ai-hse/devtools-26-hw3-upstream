@@ -4,13 +4,22 @@
 
 ## Окружение
 
-Для задания нужны Unix/Linux-окружение и Docker:
+Для задания нужны `Unix` / `Linux`-окружение и `Docker`:
 
 - Bash, `curl` и `tar`.
 - Python 3.12 с модулем `venv`.
-- Docker и плагин Docker Compose с поддержкой `up --wait`.
+- `Docker` и плагин `Docker Compose` с поддержкой `up --wait`.
 
-На Linux работайте напрямую. На macOS используйте терминал и [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/). На Windows используйте Linux-ВМ. Подойдёт и доступная вам учебная Linux-ВМ.
+На Linux работайте напрямую. Подойдёт и доступная вам учебная Linux-ВМ.
+
+<details>
+<summary><b>Mac и Windows</b></summary>
+
+**Mac.** Работайте в терминале. Установите Python 3.12 и [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/).
+
+**Windows.** Используйте Linux-ВМ и выполняйте команды задания внутри неё.
+
+</details>
 
 ### Проверить окружение
 
@@ -27,32 +36,24 @@ docker compose version
 Здесь и во всех частях команды выполняются **в выбранном окружении из корня проекта**, если шаг не говорит другого.
 
 1. Склонируйте свой репозиторий и создайте ветку `solution` от `main`. Добавьте общий репозиторий и получите обновления по [инструкции](../README.md#обновление-задания).
-
 2. Создайте виртуальное окружение и установите зависимости:
-
    ```bash
-   python3 -m venv .venv
-   .venv/bin/python -m pip install -r requirements.txt
+    python3 -m venv .venv
+    .venv/bin/python -m pip install -r requirements.txt
    ```
-
 3. Прочитайте справку анализатора и сервера:
-
    ```bash
-   .venv/bin/python app/analyzer.py --help
-   .venv/bin/python app/server.py --help
+    .venv/bin/python app/analyzer.py --help
+    .venv/bin/python app/server.py --help
    ```
 
-   Формат CSV и пример отчёта описаны в [справке](../interfaces.md).
-
+    Формат CSV и пример отчёта описаны в [справке](../interfaces.md).
 4. Создайте каталоги для результатов и обработайте первый файл:
-
    ```bash
-   mkdir -p work/reports work/logs
-   .venv/bin/python app/analyzer.py samples/clean.csv --output work/reports/clean.json
+    mkdir -p work/reports work/logs
+    .venv/bin/python app/analyzer.py samples/clean.csv --output work/reports/clean.json
    ```
-
 5. Откройте `samples/clean.csv` и `work/reports/clean.json` рядом. Каждая строка CSV описывает один эксперимент, в числовых столбцах лежат его метрики. Сверьте число строк и хотя бы одну статистику с исходными данными. Позже такие отчёты будут создавать ваши скрипты.
-
 6. Заполните `.gitignore`. В Git не должны попасть виртуальное окружение, рабочие данные, логи, архивы, локальный `.env` и кэш Python (`__pycache__`, `*.pyc`). Примеры из `samples/` остаются в Git.
 
 ## Что можно менять
@@ -86,4 +87,4 @@ docker compose version
 
 ---
 
-Подготовка закончена, если виртуальное окружение создано, а анализатор выдал первый отчёт. Переходите к [части 1](01-start.md). Удачи!
+Подготовка закончена, если виртуальное окружение создано, а анализатор выдал первый отчёт. Удачи!
