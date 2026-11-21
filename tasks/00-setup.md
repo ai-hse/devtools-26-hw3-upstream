@@ -4,39 +4,13 @@
 
 ## Окружение
 
-Нужна Linux-машина или учебная ВМ, на которой есть:
+Для задания нужны Unix/Linux-окружение и Docker:
 
-- Bash, `curl`, `tar`, `ss` и `ps`;
-- Python 3.12 с модулем `venv`;
-- Docker Engine и плагин Docker Compose с поддержкой `up --wait`.
+- Bash, `curl` и `tar`.
+- Python 3.12 с модулем `venv`.
+- Docker и плагин Docker Compose с поддержкой `up --wait`.
 
-<details>
-<summary><b>Mac и Windows</b></summary>
-
-Всё задание делается в Ubuntu 24.04. Docker Desktop не подойдёт: часть опытов сравнивает контейнер с Linux-хостом.
-
-**Mac.** Установите [Multipass](https://documentation.ubuntu.com/multipass/latest/how-to-guides/install-multipass/install-multipass-on-macos/) и создайте Ubuntu:
-
-```bash
-multipass launch 24.04 --name devtools --cpus 2 --memory 4G --disk 20G
-multipass shell devtools
-```
-
-**Windows.** В PowerShell от администратора установите [WSL 2](https://learn.microsoft.com/windows/wsl/install/) с Ubuntu: `wsl --install -d Ubuntu-24.04`. Если стоит Docker Desktop, отключите в нём интеграцию с WSL.
-
-Дальше в терминале Ubuntu установите Python с `venv` и Docker и разрешите запуск `docker` без `sudo`:
-
-```bash
-sudo apt update && sudo apt install -y python3.12-venv
-curl -fsSL https://get.docker.com | sudo sh
-sudo usermod -aG docker $USER
-```
-
-В WSL установщик Docker посоветует Docker Desktop и подождёт 20 секунд, не прерывайте его. Затем перезапустите Ubuntu: `multipass restart devtools` на Mac или `wsl --shutdown` в PowerShell.
-
-Репозиторий клонируйте в домашний каталог Ubuntu, а не в каталог, общий с Mac или Windows.
-
-</details>
+На Linux работайте напрямую. На macOS используйте терминал и [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/). На Windows используйте Linux-ВМ. Подойдёт и доступная вам учебная Linux-ВМ.
 
 ### Проверить окружение
 
@@ -46,13 +20,13 @@ docker info                # без sudo и без ошибок
 docker compose version
 ```
 
-Если чего-то не хватает, установите по инструкциям: [Python](https://docs.python.org/3.12/using/unix.html), [Docker Engine](https://docs.docker.com/engine/install/), [Compose](https://docs.docker.com/compose/install/linux/).
+Если чего-то не хватает, воспользуйтесь инструкциями по [Python](https://docs.python.org/3.12/using/unix.html), [Docker для Linux](https://docs.docker.com/engine/install/) и [Docker Compose](https://docs.docker.com/compose/install/).
 
 ## Первый отчёт
 
-Здесь и во всех частях команды выполняются **на этой Linux-машине из корня проекта**, если шаг не говорит другого.
+Здесь и во всех частях команды выполняются **в выбранном окружении из корня проекта**, если шаг не говорит другого.
 
-1. Склонируйте свой репозиторий и создайте ветку `solution` от `main`.
+1. Склонируйте свой репозиторий и создайте ветку `solution` от `main`. Добавьте общий репозиторий и получите обновления по [инструкции](../README.md#обновление-задания).
 
 2. Создайте виртуальное окружение и установите зависимости:
 
