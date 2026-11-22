@@ -72,3 +72,19 @@ docker build -t csv-reports:1 .
 > **На подумать.** Какие шаги выполнились заново во второй сборке и почему?
 
 Для части 5 оставьте один исправный контейнер без хранилища.
+
+<details>
+<summary><b>По желанию · Почему контейнер завершился с кодом 137?</b></summary>
+
+Скрипт `tools/memory-demo.py` постепенно занимает 128 MiB. Дайте отдельному контейнеру 64 MiB. Если имя `reports-memory-test` занято, выберите свободное.
+
+```bash
+docker run -i --name reports-memory-test --memory 64m --memory-swap 64m \
+  --entrypoint python3 csv-reports:1 - < tools/memory-demo.py
+docker inspect --format '{{.State.ExitCode}} {{.State.OOMKilled}}' reports-memory-test
+docker rm reports-memory-test
+```
+
+Какое из двух значений подтверждает, что контейнеру не хватило памяти?
+
+</details>
