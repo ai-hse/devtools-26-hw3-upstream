@@ -27,8 +27,15 @@ done
 
 tracked_list=$(mktemp "${TMPDIR:-/tmp}/hw3-ready.XXXXXX") || fail 'не удалось создать временный файл.'
 trap 'rm -f -- "$tracked_list"' EXIT
-git -C "$root" ls-files -z > "$tracked_list" || fail 'не удалось получить список файлов Git.'
-while IFS= read -r -d '' file; do
+git -C "$root" ls-files --stage -z > "$tracked_list" || fail 'не удалось получить список файлов Git.'
+while IFS= read -r -d '' entry; do
+  file=${entry#*$'\t'}
+  case "${entry%% *}" in
+    100644|100755) ;;
+    120000) fail "в Git есть символическая ссылка: $file." ;;
+    160000) fail "в Git есть подмодуль: $file." ;;
+    *) fail "неподдерживаемый тип файла в Git: $file." ;;
+  esac
   case "$file" in
     .env|.venv|.venv/*|work|work/*|*.tar.gz|*.log|*.pyc|__pycache__/*|*/__pycache__/*)
       fail "в Git отслеживается рабочий файл: $file." ;;
