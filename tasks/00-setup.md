@@ -7,7 +7,7 @@
 Для задания нужны `Unix` / `Linux`-окружение и `Docker`:
 
 - Bash, `curl` и `tar`.
-- Python 3.12 с модулем `venv`.
+- Python 3.12 или новее с модулем `venv`.
 - `Docker` и плагин `Docker Compose` с поддержкой `up --wait`.
 
 На Linux работайте напрямую. Подойдёт и доступная вам учебная Linux-ВМ.
@@ -15,7 +15,7 @@
 <details>
 <summary><b>Mac и Windows</b></summary>
 
-**Mac.** Работайте в терминале. Установите Python 3.12 и [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/).
+**Mac.** Работайте в терминале. Для Docker установите [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/).
 
 **Windows.** Используйте Linux-ВМ и выполняйте команды задания внутри неё.
 
@@ -24,12 +24,12 @@
 ### Проверить окружение
 
 ```bash
-python3 --version          # должен быть Python 3.12
+python3 --version          # 3.12 или новее
 docker info                # без sudo и без ошибок
 docker compose version
 ```
 
-Если чего-то не хватает, воспользуйтесь инструкциями по [Python](https://docs.python.org/3.12/using/unix.html), [Docker для Linux](https://docs.docker.com/engine/install/) и [Docker Compose](https://docs.docker.com/compose/install/).
+Если чего-то не хватает, воспользуйтесь инструкциями по [Python](https://docs.python.org/3/using/index.html), [Docker для Linux](https://docs.docker.com/engine/install/) и [Docker Compose](https://docs.docker.com/compose/install/).
 
 ## Первый отчёт
 
