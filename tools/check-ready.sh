@@ -41,6 +41,25 @@ while IFS= read -r -d '' entry; do
       fail "в Git отслеживается рабочий файл: $file." ;;
   esac
 done < "$tracked_list"
+# Compare the submission with the assignment revision it actually incorporates.
+base=
+for ref in refs/remotes/upstream/main refs/remotes/origin/main refs/heads/main; do
+  if git -C "$root" rev-parse --verify --quiet "$ref^{commit}" >/dev/null; then
+    base=$(git -C "$root" merge-base "$ref" HEAD) || fail 'история задания не совпадает с solution. Проверьте обновление из upstream по README.'
+    break
+  fi
+done
+[[ -n "$base" ]] || fail 'нет исходной ветки main. Получите upstream/main по инструкции в README.'
+
+git -C "$root" diff --no-renames --name-only -z "$base" HEAD -- > "$tracked_list" || fail 'не удалось сравнить решение с исходным заданием.'
+while IFS= read -r -d '' file; do
+  case "$file" in
+    scripts/start.sh|scripts/batch.sh|scripts/submit.sh|scripts/probe.sh|scripts/backup.sh) ;;
+    app/settings.py|compose.yaml|gateway/nginx.conf|Dockerfile) ;;
+    .gitignore|*/.gitignore|.dockerignore|*/.dockerignore|*.dockerignore) ;;
+    *) fail "файл вне списка разрешённых изменений: $file. См. раздел «Что можно менять» в tasks/00-setup.md." ;;
+  esac
+done < "$tracked_list"
 status=$(git -C "$root" status --porcelain) || fail 'не удалось проверить состояние Git.'
 [[ -z "$status" ]] || fail 'остались незакоммиченные или неотслеживаемые файлы. Проверьте git status.'
 (cd -- "$root" && docker compose config --quiet) || fail 'конфигурация Compose содержит ошибку.'
