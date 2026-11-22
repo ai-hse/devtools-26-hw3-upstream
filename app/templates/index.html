@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSV Reports</title>
+  <style>
+    body { max-width: 900px; margin: 48px auto; padding: 0 20px; font: 17px/1.6 system-ui, sans-serif; color: #17212b; background: #f5f7fa; }
+    section { background: white; border: 1px solid #dbe2e9; border-radius: 12px; padding: 24px; margin: 24px 0; }
+    h1,h2 { line-height: 1.2; } button { padding: 8px 16px; cursor: pointer; } code,pre { font-size: 14px; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; } #message { min-height: 1.6em; } a { color: #185abd; }
+  </style>
+</head>
+<body>
+  <h1>Отчёты по экспериментам</h1>
+  <p>Загрузите CSV со столбцами <code>experiment,accuracy,latency_ms</code>. Пустая метрика считается пропуском.</p>
+  <section>
+    <h2>Обработать таблицу</h2>
+    <form id="upload"><input type="file" name="file" accept=".csv,text/csv" required> <button>Создать отчёт</button></form>
+    <p id="message" role="status"></p>
+    <pre id="result"></pre>
+  </section>
+  <section><h2>Сохранённые отчёты</h2><button id="refresh">Обновить список</button><ul id="reports"></ul></section>
+  <script>
+    const message = document.querySelector('#message');
+    const result = document.querySelector('#result');
+    async function refresh() {
+      const response = await fetch('/reports');
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Сервис ещё не готов');
+      const list = document.querySelector('#reports'); list.replaceChildren();
+      for (const report of data) {
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '/reports/' + encodeURIComponent(report.id);
+        link.textContent = report.filename + ' – ' + report.row_count + ' строк (' + report.id + ')';
+        item.append(link); list.append(item);
+      }
+      if (!data.length) { const item = document.createElement('li'); item.textContent = 'Отчётов пока нет'; list.append(item); }
+    }
+    document.querySelector('#upload').addEventListener('submit', async event => {
+      event.preventDefault(); message.textContent = 'Обрабатываем…'; result.textContent = '';
+      try {
+        const response = await fetch('/reports', {method: 'POST', body: new FormData(event.target)});
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Сервис ещё не готов');
+        result.textContent = JSON.stringify(data, null, 2); message.textContent = 'Отчёт сохранён'; await refresh();
+      } catch (error) { message.textContent = error.message; }
+    });
+    document.querySelector('#refresh').addEventListener('click', () => refresh().catch(error => { message.textContent = error.message; }));
+    refresh().catch(error => { message.textContent = error.message; });
+  </script>
+</body>
+</html>

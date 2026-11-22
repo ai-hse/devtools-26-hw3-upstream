@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="230" viewBox="0 0 780 230" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8c959f"/>
+    </marker>
+  </defs>
+
+  <!-- Подписи дорожек -->
+  <g font-size="13" fill="#8c959f" font-family="ui-monospace, Menlo, monospace">
+    <text x="10" y="50">api</text>
+    <text x="10" y="102">gateway</text>
+    <text x="10" y="154">up --wait</text>
+  </g>
+
+  <!-- Момент готовности API -->
+  <line x1="470" y1="18" x2="470" y2="176" stroke="#8c959f" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <text x="470" y="13" font-size="12" fill="#8c959f" text-anchor="middle">API готов</text>
+
+  <g font-size="12" fill="#1f2328" text-anchor="middle">
+    <!-- api -->
+    <rect x="130" y="30" width="340" height="30" rx="6" fill="#fff8c5" stroke="#d4a72c"/>
+    <text x="300" y="50">инициализация: HTTP отвечает, <tspan font-family="ui-monospace, Menlo, monospace">/health</tspan> даёт 503</text>
+    <rect x="470" y="30" width="300" height="30" rx="6" fill="#dafbe1" stroke="#4ac26b"/>
+    <text x="620" y="50">healthy</text>
+
+    <!-- gateway -->
+    <rect x="130" y="82" width="340" height="30" rx="6" fill="#f6f8fa" stroke="#8c959f" stroke-dasharray="5 4"/>
+    <text x="300" y="102">ждёт готовности API</text>
+    <rect x="470" y="82" width="110" height="30" rx="6" fill="#ddf4ff" stroke="#54aeff"/>
+    <text x="525" y="102">запуск</text>
+    <rect x="580" y="82" width="190" height="30" rx="6" fill="#dafbe1" stroke="#4ac26b"/>
+    <text x="675" y="102">healthy</text>
+
+    <!-- up wait -->
+    <rect x="130" y="134" width="450" height="30" rx="6" fill="#f6f8fa" stroke="#8c959f" stroke-dasharray="5 4"/>
+    <text x="355" y="154">ждёт, пока оба сервиса станут healthy</text>
+    <rect x="580" y="134" width="190" height="30" rx="6" fill="#dafbe1" stroke="#4ac26b"/>
+    <text x="675" y="154">первый запрос работает</text>
+  </g>
+
+  <!-- Ось времени -->
+  <line x1="130" y1="196" x2="768" y2="196" stroke="#8c959f" stroke-width="1.4" marker-end="url(#a)"/>
+  <g font-size="12" fill="#8c959f" text-anchor="middle">
+    <text x="130" y="216">0 с</text>
+    <text x="470" y="216">STARTUP_DELAY_SECONDS</text>
+    <text x="745" y="216">время</text>
+  </g>
+</svg>
